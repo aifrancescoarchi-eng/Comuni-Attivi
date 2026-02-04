@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Supporto concreto a sindaci e segretari di piccoli comuni per bandi PNRR, analisi demografica, automazione AI e digitalizzazione amministrativa.">
+    <title>Comuni Attivi | Supporto a piccoli comuni italiani</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e3a5f;
+            --secondary-blue: #2c5282;
+            --dark-text: #1a202c;
+            --body-text: #4a5568;
+            --light-gray: #e2e8f0;
+            --bg-white: #ffffff;
+            --bg-alt: #f7fafc;
+            --accent-green: #38a169;
+            --accent-green-hover: #2f855a;
+            --accent-orange: #ed8936;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background: var(--bg-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 48px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-alt) 0%, #edf2f7 100%);
+            position: relative;
+        }
+
+        .hero-logo {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--primary-blue);
+        }
+
+        @media (min-width: 1024px) {
+            .hero-logo {
+                top: 32px;
+                left: 48px;
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--primary-blue);
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--body-text);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 200ms ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-green-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* Sections General */
+        section {
+            padding: 60px 0;
+        }
+
+        @media (min-width: 1024px) {
+            section {
+                padding: 80px 0;
+            }
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 640px) {
+            h2 {
+                font-size: 32px;
+            }
+        }
+
+        /* Chi sono Section */
+        .chi-sono {
+            background: var(--bg-white);
+        }
+
+        .chi-sono .container {
+            max-width: 700px;
+        }
+
+        .chi-sono p {
+            font-size: 18px;
+            color: var(--body-text);
+            line-height: 1.7;
+        }
+
+        /* Servizi Section */
+        .servizi {
+            background: var(--bg-alt);
+        }
+
+        .servizi-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .servizi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .servizi-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 300ms ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 16px;
+            color: var(--body-text);
+            line-height: 1.6;
+        }
+
+        /* Esempi Section */
+        .esempi {
+            background: var(--bg-white);
+        }
+
+        .esempi-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .esempi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .esempi-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .example-card {
+            background: var(--bg-alt);
+            padding: 20px;
+            border-left: 4px solid var(--accent-green);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .example-card p {
+            font-size: 15px;
+            color: var(--body-text);
+        }
+
+        /* Contatti Section */
+        .contatti {
+            background: var(--bg-alt);
+        }
+
+        .contatti-content {
+            display: grid;
+            gap: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            .contatti-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contatti-info p {
+            font-size: 18px;
+            color: var(--body-text);
+            margin-bottom: 32px;
+        }
+
+        .contact-item {
+            margin-bottom: 24px;
+        }
+
+        .contact-item strong {
+            display: block;
+            font-size: 14px;
+            color: var(--body-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .contact-item a {
+            font-size: 18px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin-top: 32px;
+        }
+
+        .social-links strong {
+            display: block;
+            font-size: 14px;
+            color: var(--body-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 16px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form */
+        .contact-form {
+            background: var(--bg-white);
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark-text);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 200ms ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #a0aec0;
+            margin-bottom: 16px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Focus styles for accessibility */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--accent-green);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-logo">Comuni Attivi</div>
+        <div class="hero-content">
+            <h1>Comuni Attivi</h1>
+            <p>Supporto concreto a piccoli comuni per bandi, demografia e digitalizzazione</p>
+            <a href="#contatti" class="btn btn-primary">Contattami</a>
+        </div>
+    </section>
+
+    <!-- Chi sono Section -->
+    <section class="chi-sono">
+        <div class="container">
+            <h2>Chi sono</h2>
+            <p>Sono un ragazzo di 19 anni che vive in un piccolo comune. Conosco le difficoltà quotidiane di sindaci e segretari. Offro aiuto pratico e low-cost su task ripetitivi e bandi anti-spopolamento.</p>
+        </div>
+    </section>
+
+    <!-- Cosa offro Section -->
+    <section class="servizi">
+        <div class="container">
+            <h2>Cosa offro</h2>
+            <div class="servizi-grid">
+                <div class="service-card">
+                    <h3>Analisi demografica rapida con AI</h3>
+                    <p>Strumenti intelligenti per leggere i dati demografici del tuo comune e identificare trend, criticità e opportunità in pochi minuti.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Supporto compilazione bandi PNRR/regionali</h3>
+                    <p>Aiuto concreto nella ricerca, analisi e compilazione di bandi nazionali e regionali per finanziamenti PNRR, anti-spopolamento e welfare.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Automazione task ripetitivi</h3>
+                    <p>Script e tool per automatizzare protocollo, anagrafe, email, reportistica: liberi ore preziose per attività a maggior valore aggiunto.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Agenti AI per segreterie comunali</h3>
+                    <p>Implementazione di assistenti AI in grado di rispondere a FAQ, gestire comunicazioni e supportare l'attività quotidiana degli uffici.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Workshop e formazione</h3>
+                    <p>Sessioni pratiche e gratuite (o a costo simbolico) per far prendere confidenza a sindaci e segretari con gli strumenti digitali essenziali.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Esempi Section -->
+    <section class="esempi">
+        <div class="container">
+            <h2>Esempi concreti</h2>
+            <div class="esempi-grid">
+                <div class="example-card">
+                    <h3>Comune di Montesanto</h3>
+                    <p>Compilata e presentata domanda per bonus famiglie entro 48 ore dalla pubblicazione del bando.</p>
+                </div>
+                <div class="example-card">
+                    <h3>Analisi Comune di Valdarno</h3>
+                    <p>Identificati 3 interventi prioritaria anti-spopolamento attraverso analisi demografica AI.</p>
+                </div>
+                <div class="example-card">
+                    <h3>Automazione Segreteria Bagni</h3>
+                    <p>Ridotto del 60% il tempo dedicato alla gestione email e protocollo tramite automazioni.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contatti Section -->
+    <section class="contatti" id="contatti">
+        <div class="container">
+            <h2>Contatti</h2>
+            <div class="contatti-content">
+                <div class="contatti-info">
+                    <p>Hai bisogno di supporto? Scrivimi. Rispondo entro 24 ore.</p>
+                    
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <a href="mailto:email@comuniattivi.it">email@comuniattivi.it</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <strong>Telefono / WhatsApp</strong>
+                        <a href="tel:+390000000000">+39 XXX XXX XXXX</a>
+                    </div>
+
+                    <div class="social-links">
+                        <strong>Social</strong>
+                        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                    </div>
+                </div>
+
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="messaggio">Messaggio</label>
+                        <textarea id="messaggio" name="messaggio" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Invia messaggio</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Comuni Attivi – Codice Fiscale / P.IVA: [DA INSERIRE]</p>
+            <nav>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Cookie Policy</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
