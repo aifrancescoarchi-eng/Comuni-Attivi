@@ -1,0 +1,2119 @@
+<!DOCTYPE html><html lang="it"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI nei Piccoli Comuni Italiani: Una Valutazione Critica di Fattibilità</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Headline:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --terracotta: #D2691E;
+            --olive-green: #8FBC8F;
+            --muted-blue: #6B7A99;
+            --warm-gray: #F5F5F0;
+            --charcoal: #2C2C2C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--warm-gray);
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+        
+        .tiempos {
+            font-family: 'Tiempos Headline', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--olive-green) 0%, var(--muted-blue) 100%);
+        }
+        
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            max-width: none;
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--muted-blue);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            margin-left: -1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-link:hover {
+            color: var(--terracotta);
+            border-left-color: var(--terracotta);
+        }
+        
+        .toc-link.active {
+            color: var(--terracotta);
+            border-left-color: var(--terracotta);
+            font-weight: 500;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--olive-green), transparent);
+            margin: 4rem 0;
+        }
+        
+        .callout-box {
+            background: linear-gradient(135deg, rgba(139, 188, 143, 0.1) 0%, rgba(107, 122, 153, 0.1) 100%);
+            border-left: 4px solid var(--terracotta);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .citation {
+            color: var(--muted-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .citation:hover {
+            color: var(--terracotta);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-gradient .tiempos {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-gradient .text-xl {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-gradient .tiempos {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-gradient .tiempos {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+  <base target="_blank">
+</head>
+
+  <body>
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+      <div class="mb-6">
+        <h3 class="tiempos text-lg font-semibold mb-4">Indice</h3>
+      </div>
+      <div class="space-y-1 text-sm">
+        <a href="#executive-summary" class="toc-link">Executive Summary</a>
+        <a href="#contesto" class="toc-link">1. Il Contesto</a>
+        <a href="#problemi-reali" class="toc-link">1.1 Problemi Reali</a>
+        <a href="#ripopolamento" class="toc-link">1.2 Il Tema del Ripopolamento</a>
+        <a href="#quadro-normativo" class="toc-link">2. Quadro Normativo</a>
+        <a href="#legge-132" class="toc-link">2.1 Legge 132/2025</a>
+        <a href="#gdpr" class="toc-link">2.2 GDPR e Privacy</a>
+        <a href="#applicazioni" class="toc-link">3. Applicazioni Realistiche</a>
+        <a href="#automazione" class="toc-link">3.1 Automazione Ripetitive</a>
+        <a href="#gestione-dati" class="toc-link">3.2 Gestione Dati</a>
+        <a href="#supporto-informativo" class="toc-link">3.3 Supporto Informativo</a>
+        <a href="#limiti-rischi" class="toc-link">4. Limiti e Rischi</a>
+        <a href="#vincoli-legali" class="toc-link">4.1 Vincoli Legali</a>
+        <a href="#rischi-operativi" class="toc-link">4.2 Rischi Operativi</a>
+        <a href="#agenti-ai" class="toc-link">5. Agenti AI</a>
+        <a href="#casi-studio" class="toc-link">6. Casi Studio</a>
+        <a href="#servizi-esterni" class="toc-link">7. Servizi da Soggetti Esterni</a>
+        <a href="#struttura" class="toc-link">8. Struttura e Governance</a>
+        <a href="#sintesi" class="toc-link">9. Sintesi Operativa</a>
+        <a href="#costi-benefici" class="toc-link">10. Costi-Benefici</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Hero Section with Bento Grid -->
+      <section class="hero-gradient text-white">
+        <div class="container mx-auto px-8 py-16">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+            <!-- Main Title -->
+            <div class="lg:col-span-2">
+              <h1 class="tiempos text-5xl font-bold mb-6 leading-tight">
+                <em>AI nei Piccoli Comuni Italiani:</em>
+                <br/>
+                Una Valutazione Critica di Fattibilità
+              </h1>
+              <p class="text-xl opacity-90 max-w-2xl">
+                Un&#39;analisi realistica e pragmatica sull&#39;uso dell&#39;intelligenza artificiale nelle amministrazioni locali sotto i 5.000 abitanti
+              </p>
+            </div>
+
+            <!-- Visual Element -->
+            <div class="lg:col-span-1">
+              <img src="https://kimi-web-img.moonshot.cn/img/images.pexels.com/f36fd7be8fb35ff8555e00f22f0f08f0717597e9.jpeg" alt="Vista aerea di un borgo antico italiano" class="rounded-lg shadow-2xl opacity-90" size="medium" aspect="wide" style="photo" query="borgo antico italiano vista aerea" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary" class="bg-white py-16">
+        <div class="container mx-auto px-8 max-w-4xl">
+          <div class="callout-box">
+            <h2 class="tiempos text-2xl font-semibold mb-4 text-gray-800">
+              <i class="fas fa-compass mr-3 text-orange-600"></i>
+              Executive Summary
+            </h2>
+            <p class="text-lg mb-4">
+              L&#39;intelligenza artificiale può aiutare i piccoli comuni italiani solo in ambiti circoscritti: automazione di attività ripetitive (protocollo, redazione atti), ricerca semantica negli archivi, risposta a FAQ standard.
+            </p>
+            <p class="mb-4">
+              È inutile o dannosa dove richiede decisioni con impatto sui diritti, dove i volumi sono troppo bassi per giustificare l&#39;investimento, o dove crea dipendenza da fornitori esterni.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+              <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                <h3 class="font-semibold text-green-800 mb-2">Servizi Realistici</h3>
+                <ul class="text-green-700 space-y-1">
+                  <li>• Assistenza alla redazione atti amministrativi</li>
+                  <li>• Sportello informativo digitale assistito</li>
+                </ul>
+              </div>
+              <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                <h3 class="font-semibold text-blue-800 mb-2">Parametri Chiave</h3>
+                <ul class="text-blue-700 space-y-1">
+                  <li>• 3-6 mesi di implementazione</li>
+                  <li>• €15.000-30.000 costi annuali</li>
+                  <li>• Riduzione 20-50% tempo specifiche attività</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Il Contesto -->
+      <section id="contesto" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Il Contesto: Problemi Reali dei Piccoli Comuni</h2>
+
+          <!-- Demographic Data -->
+          <div id="problemi-real" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Profilo Demografico e Territoriale</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-gray-800">Dati Quantitativi del Fenomeno</h4>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center p-3 bg-red-50 rounded">
+                    <span>Comuni in perdita demografica</span>
+                    <span class="font-bold text-red-600">60,8%</span>
+                  </div>
+                  <div class="flex justify-between items-center p-3 bg-orange-50 rounded">
+                    <span>Popolazione anziana (over 65)</span>
+                    <span class="font-bold text-orange-600">40-50%</span>
+                  </div>
+                  <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
+                    <span>Dipendenza fornitori esterni ICT</span>
+                    <span class="font-bold text-blue-600">90%</span>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">
+                  Fonte: <a href="https://www.agendadigitale.eu/cittadinanza-digitale/piccoli-comuni-grandi-ostacoli-lai-pubblica-e-per-pochi/" class="citation" target="_blank">Agenda Digitale</a>, <a href="https://gdc.ancidigitale.it/istat-in-calo-la-percentuale-di-comuni-che-perdono-popolazione-rispetto-al-2022/" class="citation" target="_blank">ISTAT</a>
+                </p>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-gray-800">Distribuzione Territoriale dello Spopolamento</h4>
+                <div class="chart-container" style="margin: 0; padding: 1rem;">
+                  <canvas id="demographicChart" width="400" height="300"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout-box">
+              <h4 class="font-semibold mb-3 text-gray-800">
+                <i class="fas fa-exclamation-triangle mr-2 text-orange-500"></i>
+                Problemi Operativi Critici
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center">
+                  <i class="fas fa-users text-3xl text-red-500 mb-2"></i>
+                  <h5 class="font-semibold">Carenza di Personale</h5>
+                  <p class="text-sm">2-5 dipendenti per tutte le funzioni amministrative</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-file-alt text-3xl text-orange-500 mb-2"></i>
+                  <h5 class="font-semibold">Eccesso di Burocrazia</h5>
+                  <p class="text-sm">Procedure identiche ai grandi comuni</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-laptop-code text-3xl text-blue-500 mb-2"></i>
+                  <h5 class="font-semibold">Mancanza Competenze Digitali</h5>
+                  <p class="text-sm">66% RTD con profili amministrativi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ripopolamento Section -->
+          <div id="ripopolamento" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Il Tema del Ripopolamento</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-green-700">Iniziative in Corso</h4>
+                <div class="space-y-3">
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium">Agenda Controesodo</h5>
+                    <p class="text-sm text-gray-600">Incentivi fiscali, sostegno start-up, servizi digitali</p>
+                  </div>
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium">Incentivi Regionali</h5>
+                    <p class="text-sm text-gray-600">Sardegna: €600/mese per primo figlio</p>
+                  </div>
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium">Nomadismo Digitale</h5>
+                    <p class="text-sm text-gray-600">Progetti Kino in Basilicata, bonus Valforte €5.000</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-red-700">Cause di Insuccesso</h4>
+                <div class="space-y-3">
+                  <div class="border-l-4 border-red-500 pl-4">
+                    <h5 class="font-medium">Approccio Simbolico</h5>
+                    <p class="text-sm text-gray-600">Eventi promozionali senza impatto strutturale</p>
+                  </div>
+                  <div class="border-l-4 border-orange-500 pl-4">
+                    <h5 class="font-medium">Mancanza Servizi Essenziali</h5>
+                    <p class="text-sm text-gray-600">Chiusura scuole, uffici postali, sanità</p>
+                  </div>
+                  <div class="border-l-4 border-gray-500 pl-4">
+                    <h5 class="font-medium">Resistenza Culturale</h5>
+                    <p class="text-sm text-gray-600">Diffidenza verso &#34;invasione&#34; di esterni</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-sm text-gray-600 mt-4">
+              Fonte: <a href="https://www.ansa.it/molise/notizie/2024/03/19/decaro-problemi-dei-piccoli-comuni-sono-del-governo-nazionale_d523cff1-f307-467d-9f8c-2fad0f068bef.html" class="citation" target="_blank">ANSA</a>, <a href="https://en.ilsole24ore.com/art/from-1-euro-houses-new-start-up-field-initiatives-save-small-villages-depopulation-AHym4ysB" class="citation" target="_blank">Il Sole 24 Ore</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Quadro Normativo -->
+      <section id="quadro-normativo" class="py-16 bg-white">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Quadro Normativo: Vincoli e Opportunità</h2>
+
+          <div id="legge-132" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">La Legge 132/2025: Nuovo Paradigma Legale</h3>
+
+            <div class="callout-box">
+              <h4 class="font-semibold mb-3 text-gray-800">
+                <i class="fas fa-balance-scale mr-2 text-blue-600"></i>
+                Principio Fondamentale: AI come strumento, mai come decisore
+              </h4>
+              <blockquote class="italic text-lg mb-4 pl-4 border-l-4 border-blue-500">
+                &#34;L&#39;utilizzo dell&#39;intelligenza artificiale avviene in funzione strumentale e di supporto all&#39;attività provvedimentale, nel rispetto dell&#39;autonomia e del potere decisionale della persona che resta l&#39;unica responsabile dei provvedimenti&#34;
+              </blockquote>
+              <p class="text-sm text-gray-600">
+                Art. 14, Legge 132/2025 - <a href="https://www.ilpersonale.it/legge-132-2025-sullintelligenza-artificiale-un-punto-di-svolta-per-la-pa-italiana/" class="citation" target="_blank">Fonte</a>
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+              <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                <h4 class="font-semibold mb-4 text-green-800">Cosa è Permesso</h4>
+                <ul class="space-y-2 text-green-700">
+                  <li>• Supporto alla redazione atti</li>
+                  <li>• Classificazione documentale</li>
+                  <li>• Ricerca semantica negli archivi</li>
+                  <li>• Risposta a FAQ standard</li>
+                </ul>
+              </div>
+              <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                <h4 class="font-semibold mb-4 text-red-800">Cosa è Vietato</h4>
+                <ul class="space-y-2 text-red-700">
+                  <li>• Decisioni con effetti giuridici</li>
+                  <li>• Scoring per benefici sociali</li>
+                  <li>• AI predittiva per servizi sociali</li>
+                  <li>• Sorveglianza automatizzata</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="gdpr" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Vincoli GDPR e Garante Privacy</h3>
+
+            <div class="bg-white border border-red-200 rounded-lg p-6 mb-6">
+              <h4 class="font-semibold mb-3 text-red-800">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                Caso di Studio: Comune di Trento
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h5 class="font-medium mb-2">Problema</h5>
+                  <p class="text-sm text-gray-700">Chatbot per informazioni ai cittadini sanzionato con <strong>€50.000</strong> per violazioni GDPR</p>
+                </div>
+                <div>
+                  <h5 class="font-medium mb-2">Lezioni Apprese</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Informativa privacy obbligatoria</li>
+                    <li>• Valutazione impatto (DPIA) necessaria</li>
+                    <li>• Documentazione completa richiesta</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Fonte: <a href="https://dig.watch/updates/italian-municipality-fined-e50000-for-data-privacy-breach-in-ai-use" class="citation" target="_blank">DIG.watch</a>
+              </p>
+            </div>
+
+            <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+              <h4 class="font-semibold mb-3 text-yellow-800">
+                <i class="fas fa-shield-alt mr-2"></i>
+                Implicazioni per i Piccoli Comuni
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center">
+                  <i class="fas fa-money-bill-wave text-2xl text-yellow-600 mb-2"></i>
+                  <h5 class="font-medium">Rischio Sanzioni Elevate</h5>
+                  <p class="text-sm">Multe superiori al budget annuale</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-clipboard-check text-2xl text-yellow-600 mb-2"></i>
+                  <h5 class="font-medium">Compliance Complessa</h5>
+                  <p class="text-sm">DPIA obbligatoria per progetti semplici</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-user-tie text-2xl text-yellow-600 mb-2"></i>
+                  <h5 class="font-medium">Scarsa Capacità Interna</h5>
+                  <p class="text-sm">Necessità di supporto specializzato</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Applicazioni Realistiche -->
+      <section id="applicazioni" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Dove l&#39;AI Può Aiutare: Applicazioni Realistiche</h2>
+
+          <div id="automazione" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Automazione di Attività Ripetitive</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-blue-700">
+                  <i class="fas fa-envelope mr-2"></i>
+                  Gestione Protocollo Informatico
+                </h4>
+                <div class="chart-container" style="margin: 1rem 0; padding: 1rem;">
+                  <canvas id="pecChart" width="400" height="300"></canvas>
+                </div>
+                <div class="mt-4 space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Riduzione tempo gestione:</span>
+                    <span class="font-bold text-green-600">-40%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Tasso errore iniziale:</span>
+                    <span class="font-bold text-orange-600">15%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Tasso errore a regime:</span>
+                    <span class="font-bold text-green-600">5%</span>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-600 mt-3">
+                  Fonte: <a href="https://www.make-it.it/news/gestione-pec-il-comune-di-cinisello-balsamo-punta-sullai-con-il-supporto-di-make-it/" class="citation" target="_blank">Cinisello Balsamo</a>
+                </p>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-green-700">
+                  <i class="fas fa-file-signature mr-2"></i>
+                  Supporto alla Redazione Atti
+                </h4>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium">Tempo Ridotto</h5>
+                    <p class="text-sm text-gray-700">30-50% in meno per atti standard</p>
+                  </div>
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium">Qualità Migliorata</h5>
+                    <p class="text-sm text-gray-700">Meno errori formali, maggiore coerenza</p>
+                  </div>
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium">Responsabilità Umana</h5>
+                    <p class="text-sm text-gray-700">Funzionario approva e firma sempre</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="gestione-dati" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Gestione e Sintesi di Dati Esistenti</h3>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <h4 class="font-semibold mb-6 text-center text-gray-800">Ricerca Semantica negli Archivi</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                  <i class="fas fa-search text-3xl text-blue-500 mb-3"></i>
+                  <h5 class="font-medium mb-2">Estrazione Informazioni</h5>
+                  <p class="text-sm text-gray-600">Da documenti non strutturati e scansionati</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-sitemap text-3xl text-green-500 mb-3"></i>
+                  <h5 class="font-medium mb-2">Mappatura Competenze</h5>
+                  <p class="text-sm text-gray-600">Identifica settori e pratiche trasversali</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-route text-3xl text-purple-500 mb-3"></i>
+                  <h5 class="font-medium mb-2">Ricostruzione Pratiche</h5>
+                  <p class="text-sm text-gray-600">Tracciamento iter procedurali complessi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="supporto-informativo" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Supporto Informativo</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-blue-700">Chatbot per FAQ Standard</h4>
+                <div class="chart-container" style="margin: 1rem 0; padding: 1rem;">
+                  <canvas id="chatbotChart" width="400" height="300"></canvas>
+                </div>
+                <div class="mt-4 space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Riduzione chiamate telefoniche:</span>
+                    <span class="font-bold text-green-600">-30%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Comuni con progetti simili:</span>
+                    <span class="font-bold text-blue-600">60%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Soglia di convenienza:</span>
+                    <span class="font-bold text-purple-600">50+ richieste/sett.</span>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-600 mt-3">
+                  Fonte: <a href="https://cms.implementconsultinggroup.com/media/uploads/articles/2025/The-opportunity-of-AI-in-public-administration-in-Italy/2025-The-opportunity-of-AI-in-public-administration-in-Italy-English.pdf" class="citation" target="_blank">Implement Consulting Group</a>
+                </p>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-green-700">Supporto agli Amministratori</h4>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium">Sintesi Documenti</h5>
+                    <p class="text-sm text-gray-700">Riassunti strutturati per consigli comunali</p>
+                  </div>
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium">Preparazione Risposte</h5>
+                    <p class="text-sm text-gray-700">Strutturazione risposte a interrogazioni</p>
+                  </div>
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium">Monitoraggio Normativo</h5>
+                    <p class="text-sm text-gray-700">Scansione automatica modifiche legislative</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Limiti e Rischi -->
+      <section id="limiti-rischi" class="py-16 bg-white">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Dove l&#39;AI Non è Adatta: Rischi e Limiti</h2>
+
+          <div id="vincoli-legali" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Vincoli Legali e di Responsabilità</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                <h4 class="font-semibold mb-4 text-red-800">
+                  <i class="fas fa-gavel mr-2"></i>
+                  Decisioni con Impatto sui Diritti
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-home text-red-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Edilizia Residenziale Pubblica</h5>
+                      <p class="text-sm text-red-700">Assegnazione alloggi popolari</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-hand-holding-heart text-red-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Politiche Sociali</h5>
+                      <p class="text-sm text-red-700">Erogazione reddito di cittadinanza</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-calculator text-red-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Tributi Locali</h5>
+                      <p class="text-sm text-red-700">Determinazioni individuali</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
+                <h4 class="font-semibold mb-4 text-orange-800">
+                  <i class="fas fa-eye-slash mr-2"></i>
+                  Opacità Algoritmica
+                </h4>
+                <div class="space-y-4">
+                  <div>
+                    <h5 class="font-medium mb-2">Difficoltà di Spiegazione</h5>
+                    <p class="text-sm text-orange-700">Impossibilità di spiegare a cittadini e giudici la logica decisionale</p>
+                  </div>
+                  <div>
+                    <h5 class="font-medium mb-2">Rischio Discriminazioni</h5>
+                    <p class="text-sm text-orange-700">Amplificazione pregiudizi presenti nei dati di training</p>
+                  </div>
+                  <div>
+                    <h5 class="font-medium mb-2">Responsabilità Ambigua</h5>
+                    <p class="text-sm text-orange-700">Difficoltà nell&#39;attribuire responsabilità per errori algoritmici</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="rischi-operativi" class="mb-16">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Rischi Operativi</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                <h4 class="font-semibold mb-4 text-yellow-800">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>
+                  Affidabilità e Allucinazioni
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-quote-left text-yellow-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Errori Normativi</h5>
+                      <p class="text-sm text-yellow-700">Citazione di norme inesistenti</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-link text-yellow-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Fonti Inesistenti</h5>
+                      <p class="text-sm text-yellow-700">Riferimenti a documenti non reali</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-thought-bubble text-yellow-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Ragionamenti Errati</h5>
+                      <p class="text-sm text-yellow-700">Coerenti ma giuridicamente scorretti</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                <h4 class="font-semibold mb-4 text-purple-800">
+                  <i class="fas fa-chain mr-2"></i>
+                  Dipendenza Tecnologica
+                </h4>
+                <div class="space-y-4">
+                  <div>
+                    <h5 class="font-medium mb-2">Lock-in Tecnologico</h5>
+                    <p class="text-sm text-purple-700">Difficoltà di cambiare fornitore o tecnologia</p>
+                  </div>
+                  <div>
+                    <h5 class="font-medium mb-2">Perdita Competenze Interne</h5>
+                    <p class="text-sm text-purple-700">Atrofizzazione capacità organizzative</p>
+                  </div>
+                  <div>
+                    <h5 class="font-medium mb-2">Vulnerabilità a Discontinuità</h5>
+                    <p class="text-sm text-purple-700">Interruzione servizio, perdita accesso dati</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-100 p-6 rounded-lg mt-8">
+              <h4 class="font-semibold mb-4 text-gray-800">
+                <i class="fas fa-chart-bar mr-2 text-gray-600"></i>
+                Inadeguatezza Contestuale: Volumi Troppo Bassi
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center">
+                  <i class="fas fa-envelope text-2xl text-blue-500 mb-2"></i>
+                  <h5 class="font-medium">PEC</h5>
+                  <p class="text-sm text-gray-600">Soglia: 200+ mensili</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-file-alt text-2xl text-green-500 mb-2"></i>
+                  <h5 class="font-medium">Atti Amministrativi</h5>
+                  <p class="text-sm text-gray-600">Soglia: 500+ annui</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-comments text-2xl text-purple-500 mb-2"></i>
+                  <h5 class="font-medium">FAQ</h5>
+                  <p class="text-sm text-gray-600">Soglia: 50+ settimanali</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Per comuni sotto queste soglie, soluzioni &#34;low-tech&#34; offrono miglior rapporto costo-beneficio
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Agenti AI -->
+      <section id="agenti-ai" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Agenti AI: Fattibilità Operativa</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <h3 class="font-semibold mb-6 text-green-700">
+                <i class="fas fa-check-circle mr-2"></i>
+                Attività Supervisionabili e Spiegabili
+              </h3>
+
+              <div class="mb-6">
+                <h4 class="font-medium mb-4">Criteri di Selezione</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-search text-green-500"></i>
+                    <div>
+                      <h5 class="font-medium">Verificabilità</h5>
+                      <p class="text-sm text-gray-600">Output controllabile in &lt; 10 minuti</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-edit text-green-500"></i>
+                    <div>
+                      <h5 class="font-medium">Correggibilità</h5>
+                      <p class="text-sm text-gray-600">Errore sanabile senza danni irreversibili</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-route text-green-500"></i>
+                    <div>
+                      <h5 class="font-medium">Tracciabilità</h5>
+                      <p class="text-sm text-gray-600">Processo documentabile e spiegabile</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-4">Esempi Concreti</h4>
+                <div class="space-y-2">
+                  <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+                    <h5 class="font-medium text-sm">Pre-compilazione moduli standard</h5>
+                  </div>
+                  <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+                    <h5 class="font-medium text-sm">Suggerimento classificazione tributaria</h5>
+                  </div>
+                  <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+                    <h5 class="font-medium text-sm">Trascrizione e riassunto verbali</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+              <h3 class="font-semibold mb-6 text-red-700">
+                <i class="fas fa-times-circle mr-2"></i>
+                Attività Irrealistiche o Troppo Rischiose
+              </h3>
+
+              <div class="mb-6">
+                <h4 class="font-medium mb-4">Interazione Diretta con Cittadini</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-city text-red-500"></i>
+                    <div>
+                      <h5 class="font-medium">Segnalazioni Degrado Urbano</h5>
+                      <p class="text-sm text-gray-600">Contest emotivi, urgenza variabile</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-hands-helping text-red-500"></i>
+                    <div>
+                      <h5 class="font-medium">Intervento Sociale Urgente</h5>
+                      <p class="text-sm text-gray-600">Vulnerabilità, complessità caso</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-calculator text-red-500"></i>
+                    <div>
+                      <h5 class="font-medium">Contestazioni Tributarie</h5>
+                      <p class="text-sm text-gray-600">Adversarialità, diritti in gioco</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-4">Processi Critici</h4>
+                <div class="space-y-2">
+                  <div class="bg-red-50 p-3 rounded border-l-4 border-red-500">
+                    <h5 class="font-medium text-sm">Approvazione permessi di costruire</h5>
+                  </div>
+                  <div class="bg-red-50 p-3 rounded border-l-4 border-red-500">
+                    <h5 class="font-medium text-sm">Aggiudicazione appalti</h5>
+                  </div>
+                  <div class="bg-red-50 p-3 rounded border-l-4 border-red-500">
+                    <h5 class="font-medium text-sm">Assunzioni e gestione personale</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Casi Studio -->
+      <section id="casi-studio" class="py-16 bg-white">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Casi Studio: Lezioni dall&#39;Esperienza</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Caso di Successo: Cinisello Balsamo -->
+            <div class="bg-green-50 p-8 rounded-lg border border-green-200">
+              <h3 class="font-semibold mb-4 text-green-800">
+                <i class="fas fa-trophy mr-2"></i>
+                Caso di Successo: Cinisello Balsamo
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-medium mb-2">Contesto</h4>
+                  <p class="text-sm text-gray-700">Comune di 75.000 abitanti con elevato volume di PEC da gestire</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Tecnologia</h4>
+                  <p class="text-sm text-gray-700">Machine learning per analisi semantica email PEC</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Risultati</h4>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Riduzione tempo gestione: <strong>-40%</strong></li>
+                    <li>• Tasso errore da 15% a <strong>5%</strong></li>
+                    <li>• Personale riallocato su attività ad alto valore</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Lezioni Replicabili</h4>
+                  <ul class="text-sm text-green-700 space-y-1">
+                    <li>• Partire da processi ben definiti</li>
+                    <li>• Investire in fase di training</li>
+                    <li>• Mantenere supervisione umana</li>
+                    <li>• Integrare, non sostituire</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs text-gray-600 mt-4">
+                Fonte: <a href="https://www.make-it.it/news/gestione-pec-il-comune-di-cinisello-balsamo-punta-sullai-con-il-supporto-di-make-it/" class="citation" target="_blank">Make-it.it</a>
+              </p>
+            </div>
+
+            <!-- Caso di Successo: Padova -->
+            <div class="bg-blue-50 p-8 rounded-lg border border-blue-200">
+              <h3 class="font-semibold mb-4 text-blue-800">
+                <i class="fas fa-robot mr-2"></i>
+                Caso di Successo: Padova
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-medium mb-2">Contesto</h4>
+                  <p class="text-sm text-gray-700">210.000 abitanti, alta richiesta informazioni da popolazione giovane</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Tecnologia</h4>
+                  <p class="text-sm text-gray-700">Chatbot NLP per FAQ su servizi municipali</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Risultati</h4>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Riduzione chiamate telefoniche: <strong>-30%</strong></li>
+                    <li>• Disponibilità 24/7 per informazioni standard</li>
+                    <li>• Alta soddisfazione cittadini misurata</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Lezioni Replicabili</h4>
+                  <ul class="text-sm text-blue-700 space-y-1">
+                    <li>• Ambito ristretto e ben delimitato</li>
+                    <li>• Base conoscenza strutturata e aggiornata</li>
+                    <li>• Percorso di escalation chiaro</li>
+                    <li>• Adattabile a piccoli comuni</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs text-gray-600 mt-4">
+                Fonte: <a href="https://cms.implementconsultinggroup.com/media/uploads/articles/2025/The-opportunity-of-AI-in-public-administration-in-Italy/2025-The-opportunity-of-AI-in-public-administration-in-Italy-English.pdf" class="citation" target="_blank">Implement Consulting Group</a>
+              </p>
+            </div>
+
+            <!-- Caso di Insuccesso: Trento -->
+            <div class="bg-red-50 p-8 rounded-lg border border-red-200">
+              <h3 class="font-semibold mb-4 text-red-800">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                Caso di Insuccesso: Trento
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-medium mb-2">Contesto</h4>
+                  <p class="text-sm text-gray-700">Implementazione chatbot per informazioni ai cittadini</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Problemi Emerse</h4>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Informativa privacy insufficiente</li>
+                    <li>• DPIA non condotta</li>
+                    <li>• Documentazione inadeguata</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Esito</h4>
+                  <p class="text-sm text-red-700 font-semibold">Sanzione di €50.000 dal Garante Privacy</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Lezioni da Evitare</h4>
+                  <ul class="text-sm text-red-700 space-y-1">
+                    <li>• Non sottovalutare compliance GDPR</li>
+                    <li>• Non improvvisare senza DPIA</li>
+                    <li>• Non affidarsi solo al fornitore</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs text-gray-600 mt-4">
+                Fonte: <a href="https://dig.watch/updates/italian-municipality-fined-e50000-for-data-privacy-breach-in-ai-use" class="citation" target="_blank">DIG.watch</a>
+              </p>
+            </div>
+
+            <!-- Caso Istruttivo: Campania -->
+            <div class="bg-yellow-50 p-8 rounded-lg border border-yellow-200">
+              <h3 class="font-semibold mb-4 text-yellow-800">
+                <i class="fas fa-virus mr-2"></i>
+                Caso Istruttivo: Campania (COVID-19)
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-medium mb-2">Contesto</h4>
+                  <p class="text-sm text-gray-700">Emergenza sanitaria, sovraccarico informativo su restrizioni e vaccinazioni</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Tecnologia</h4>
+                  <p class="text-sm text-gray-700">Sistema &#34;Ivan&#34; per gestione query cittadini con integrazione database regionali</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Limiti Emerse</h4>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Efficacia legata a contesto emergenziale</li>
+                    <li>• Scalabilità limitata a situazioni ordinarie</li>
+                    <li>• Dipendenza da infrastrutture pregresse</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Lezioni per i Piccoli Comuni</h4>
+                  <ul class="text-sm text-yellow-700 space-y-1">
+                    <li>• AI efficace in contesti di crisi</li>
+                    <li>• Progettazione ordinaria più attenta</li>
+                    <li>• Sostenibilità nel tempo fondamentale</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <h3 class="font-semibold mb-4 text-gray-800">
+              <i class="fas fa-lightbulb mr-3 text-yellow-600"></i>
+              Sintesi delle Lezioni Chiave
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-medium mb-3 text-green-700">Fattori di Successo</h4>
+                <ul class="space-y-1 text-sm text-green-700">
+                  <li>• Partire da processi ben definiti e documentati</li>
+                  <li>• Investire in fase di training e supervisione</li>
+                  <li>• Mantenere sempre supervisione umana finale</li>
+                  <li>• Integrare con sistemi esistenti, non sostituire</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium mb-3 text-red-700">Errori da Evitare</h4>
+                <ul class="space-y-1 text-sm text-red-700">
+                  <li>• Non sottovalutare compliance normativa e GDPR</li>
+                  <li>• Non improvvisare senza valutazione impatto (DPIA)</li>
+                  <li>• Non affidarsi esclusivamente al fornitore</li>
+                  <li>• Non applicare soluzioni sovradimensionate</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Servizi da Soggetti Esterni -->
+      <section id="servizi-esterni" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Servizi Proponibili da un Soggetto Esterno</h2>
+
+          <div class="mb-12">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Criteri di Selezione</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-blue-700">
+                  <i class="fas fa-shield-alt mr-2"></i>
+                  Basso Rischio Politico
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-blue-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Non interferisce con decisioni discrezionali</p>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-blue-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Non impatta significativamente sul bilancio</p>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-blue-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Revocabile immediatamente senza penali</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-green-700">
+                  <i class="fas fa-comments mr-2"></i>
+                  Facilità di Comprensione
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-clock text-green-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Spiegabile in 10 minuti a un sindaco</p>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-eye text-green-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Beneficio immediatamente percepibile</p>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-language text-green-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Senza linguaggio tecnico complicato</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-purple-700">
+                  <i class="fas fa-unlink mr-2"></i>
+                  Interrompibilità Senza Danni
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-lock-open text-purple-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Nessun lock-in tecnologico</p>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-download text-purple-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Dati sempre esportabili</p>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-undo text-purple-500 mt-1"></i>
+                    <p class="text-sm text-gray-700">Continuità operativa garantita</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-12">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Servizi Potenzialmente Rilevanti</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Supporto Amministrativo Leggero -->
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-blue-700">
+                  <i class="fas fa-file-alt mr-2"></i>
+                  Supporto Amministrativo Leggero
+                </h4>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium text-sm">Redazione e Revisione Bandi</h5>
+                    <p class="text-xs text-gray-600">Supporto strutturazione, controllo completezza</p>
+                  </div>
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium text-sm">Comunicazione Istituzionale</h5>
+                    <p class="text-xs text-gray-600">Supporto newsletter, social media, sito web</p>
+                  </div>
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h5 class="font-medium text-sm">Gestione Scadenze</h5>
+                    <p class="text-xs text-gray-600">Monitoraggio normativo, segnalazione termini</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mappatura Risorse Locali -->
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-green-700">
+                  <i class="fas fa-map-marked-alt mr-2"></i>
+                  Mappatura e Valorizzazione Risorse
+                </h4>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium text-sm">Censimento Case Vuote</h5>
+                    <p class="text-xs text-gray-600">Analisi catasto, identificazione dismesse</p>
+                  </div>
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium text-sm">Mappatura Competenze Territorio</h5>
+                    <p class="text-xs text-gray-600">Identificazione professionisti, artigiani</p>
+                  </div>
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h5 class="font-medium text-sm">Analisi Potenzialità Turistiche</h5>
+                    <p class="text-xs text-gray-600">Valorizzazione risorse culturali, ambientali</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Comunicazione Cittadini -->
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-purple-700">
+                  <i class="fas fa-comments mr-2"></i>
+                  Gestione Comunicazione Cittadini
+                </h4>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium text-sm">FAQ Intelligenti</h5>
+                    <p class="text-xs text-gray-600">Risposta automatica domande ricorrenti</p>
+                  </div>
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium text-sm">Newsletter Comunali</h5>
+                    <p class="text-xs text-gray-600">Raccolta contenuti, redazione bozze</p>
+                  </div>
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h5 class="font-medium text-sm">Monitoraggio Reputazione Online</h5>
+                    <p class="text-xs text-gray-600">Analisi menzioni, sentiment, criticità</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <h3 class="font-semibold mb-4 text-gray-800">
+              <i class="fas fa-ban mr-3 text-red-600"></i>
+              Servizi da Non Proporre
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-red-50 p-4 rounded border-l-4 border-red-500">
+                <h4 class="font-semibold mb-2 text-red-800">Sistemi Decisionali Automatizzati</h4>
+                <ul class="text-sm text-red-700 space-y-1">
+                  <li>• AI per assegnazione benefici sociali</li>
+                  <li>• Algoritmi di prioritizzazione richieste</li>
+                  <li>• Sistemi predittivi per servizio sociale</li>
+                </ul>
+              </div>
+              <div class="bg-orange-50 p-4 rounded border-l-4 border-orange-500">
+                <h4 class="font-semibold mb-2 text-orange-800">Soluzioni Sovradimensionate</h4>
+                <ul class="text-sm text-orange-700 space-y-1">
+                  <li>• Piattaforme smart city integrate</li>
+                  <li>• Videosorveglianza con analisi comportamentale</li>
+                  <li>• Chatbot multilingue per comuni monolingui</li>
+                </ul>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded border-l-4 border-yellow-500">
+                <h4 class="font-semibold mb-2 text-yellow-800">Servizi con Elevata Dipendenza Dati</h4>
+                <ul class="text-sm text-yellow-700 space-y-1">
+                  <li>• Analisi predittive su dataset incompleti</li>
+                  <li>• Modelli ML senza storicità sufficiente</li>
+                  <li>• Sistemi di raccomandazione personalizzata</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: Struttura e Governance -->
+      <section id="struttura" class="py-16 bg-white">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Struttura e Governance della Micro-Struttura</h2>
+
+          <div class="mb-12">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Forma Organizzativa Raccomandata</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div class="bg-green-50 p-8 rounded-lg border border-green-200">
+                <h4 class="font-semibold mb-4 text-green-800">
+                  <i class="fas fa-users mr-2"></i>
+                  Cooperativa di Comunità o Consorzio
+                </h4>
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-handshake text-green-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Partecipazione dei Comuni</h5>
+                      <p class="text-sm text-gray-700">Governance condivisa, allineamento interessi</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-eye text-green-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Governanza Trasparente</h5>
+                      <p class="text-sm text-gray-700">Controllo democratico, prevenzione conflitti</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-recycle text-green-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Reinvestimento nel Territorio</h5>
+                      <p class="text-sm text-gray-700">Sostenibilità, sviluppo locale condiviso</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 p-3 bg-green-100 rounded">
+                  <p class="text-sm text-green-800">
+                    <strong>Esempio:</strong> Unione dei Comuni della Maiella (9 comuni abruzzesi)
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-red-50 p-8 rounded-lg border border-red-200">
+                <h4 class="font-semibold mb-4 text-red-800">
+                  <i class="fas fa-times-circle mr-2"></i>
+                  Da Evitare: Startup Tecnologica Tradizionale
+                </h4>
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-dollar-sign text-red-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Percezione Conflitto Interessi</h5>
+                      <p class="text-sm text-gray-700">Obiettivo profitto primario</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-chart-line text-red-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Pressione per Crescita</h5>
+                      <p class="text-sm text-gray-700">Espansione rapida, standardizzazione</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-handshake-slash text-red-600 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Rischio Acquisizione</h5>
+                      <p class="text-sm text-gray-700">Cambio controllo, discontinuità</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-12">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Gestione della Responsabilità</h3>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg mb-6">
+              <h4 class="font-semibold mb-6 text-gray-800">Suddivisione Chiara con il Comune</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b-2 border-gray-200">
+                      <th class="text-left py-3 px-4 font-semibold">Livello</th>
+                      <th class="text-left py-3 px-4 font-semibold">Responsabilità</th>
+                      <th class="text-left py-3 px-4 font-semibold">Titolare</th>
+                    </tr>
+                  </thead>
+                  <tbody class="space-y-2">
+                    <tr class="border-b border-gray-100">
+                      <td class="py-3 px-4 font-medium text-blue-600">Tecnica</td>
+                      <td class="py-3 px-4">Funzionamento, aggiornamenti, sicurezza</td>
+                      <td class="py-3 px-4">Fornitore/micro-struttura</td>
+                    </tr>
+                    <tr class="border-b border-gray-100">
+                      <td class="py-3 px-4 font-medium text-green-600">Giuridica</td>
+                      <td class="py-3 px-4">Decisioni finali, conformità, responsabilità</td>
+                      <td class="py-3 px-4">Comune</td>
+                    </tr>
+                    <tr>
+                      <td class="py-3 px-4 font-medium text-purple-600">Operativa</td>
+                      <td class="py-3 px-4">Uso corretto, verifica output, formazione</td>
+                      <td class="py-3 px-4">Personale comunale</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+              <h4 class="font-semibold mb-3 text-blue-800">
+                <i class="fas fa-shield-alt mr-2"></i>
+                Requisiti Assicurativi e Documentazione
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center">
+                  <i class="fas fa-file-contract text-2xl text-blue-600 mb-2"></i>
+                  <h5 class="font-medium">Assicurazione Professionale</h5>
+                  <p class="text-sm text-gray-700">Copertura danni da malfunzionamenti</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-clipboard-list text-2xl text-blue-600 mb-2"></i>
+                  <h5 class="font-medium">Registro Operazioni</h5>
+                  <p class="text-sm text-gray-700">Data, input, output, operatore verifica</p>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-file-alt text-2xl text-blue-600 mb-2"></i>
+                  <h5 class="font-medium">Report Periodici</h5>
+                  <p class="text-sm text-gray-700">Performance, errori, accesso ai log</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-12">
+            <h3 class="tiempos text-2xl font-semibold mb-8">Supervisione Umana e Trasparenza</h3>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg mb-6">
+              <h4 class="font-semibold mb-6 text-gray-800">Modello &#34;Human in the Loop&#34;</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b-2 border-gray-200">
+                      <th class="text-left py-3 px-4 font-semibold">Fase</th>
+                      <th class="text-left py-3 px-4 font-semibold">Ruolo AI</th>
+                      <th class="text-left py-3 px-4 font-semibold">Ruolo Umano</th>
+                    </tr>
+                  </thead>
+                  <tbody class="space-y-2">
+                    <tr class="border-b border-gray-100">
+                      <td class="py-3 px-4 font-medium text-blue-600">Input</td>
+                      <td class="py-3 px-4">Ricezione e pre-elaborazione</td>
+                      <td class="py-3 px-4">Verifica completezza, approvazione</td>
+                    </tr>
+                    <tr class="border-b border-gray-100">
+                      <td class="py-3 px-4 font-medium text-green-600">Elaborazione</td>
+                      <td class="py-3 px-4">Generazione proposta</td>
+                      <td class="py-3 px-4">Monitoraggio, intervento se anomalie</td>
+                    </tr>
+                    <tr class="border-b border-gray-100">
+                      <td class="py-3 px-4 font-medium text-purple-600">Output</td>
+                      <td class="py-3 px-4">Presentazione risultato</td>
+                      <td class="py-3 px-4">Verifica, modifica, approvazione finale</td>
+                    </tr>
+                    <tr>
+                      <td class="py-3 px-4 font-medium text-orange-600">Apprendimento</td>
+                      <td class="py-3 px-4">Aggiornamento da correzioni</td>
+                      <td class="py-3 px-4">Validazione miglioramenti, segnalazione errori</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-purple-700">
+                  <i class="fas fa-eye mr-2"></i>
+                  Trasparenza Completa
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-database text-purple-500 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Accesso ai Log</h5>
+                      <p class="text-sm text-gray-700">Nessuna &#34;scatola nera&#34;, accesso completo</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-chart-line text-purple-500 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Report Performance</h5>
+                      <p class="text-sm text-gray-700">Metriche chiare, confrontabili nel tempo</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-graduation-cap text-purple-500 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Formazione su Limiti</h5>
+                      <p class="text-sm text-gray-700">Non solo &#34;come si usa&#34; ma &#34;cosa può fare&#34;</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h4 class="font-semibold mb-4 text-orange-700">
+                  <i class="fas fa-handshake mr-2"></i>
+                  Evitare Percezione &#34;Vendor Tecnologico&#34;
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-comments text-orange-500 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Linguaggio Concreto</h5>
+                      <p class="text-sm text-gray-700">Orientato a problemi, non buzzword</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-map-marker-alt text-orange-500 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Presenza Regolare</h5>
+                      <p class="text-sm text-gray-700">Sul territorio, partecipazione eventi</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <i class="fas fa-users text-orange-500 mt-1"></i>
+                    <div>
+                      <h5 class="font-medium">Coinvolgimento Ampliato</h5>
+                      <p class="text-sm text-gray-700">Con tutto il personale, cittadini, associazioni</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <h3 class="font-semibold mb-4 text-gray-800">
+              <i class="fas fa-handshake mr-3 text-blue-600"></i>
+              Modello Economico e Relazionale
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-medium mb-3 text-blue-700">Tariffazione Basata su Risultati</h4>
+                <ul class="space-y-1 text-sm text-blue-700">
+                  <li>• Pagamento legato a benefici effettivi</li>
+                  <li>• Possibilità di sospensione senza penali</li>
+                  <li>• Condivisione dei rischi di implementazione</li>
+                  <li>• Allineamento completo degli interessi</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium mb-3 text-green-700">Costruzione Relazione di Fiducia</h4>
+                <ul class="space-y-1 text-sm text-green-700">
+                  <li>• Comunicazione trasparente su limiti e possibilità</li>
+                  <li>• Coinvolgimento attivo del personale locale</li>
+                  <li>• Supporto continuo e formazione inclusiva</li>
+                  <li>• Focus su risultati concreti, non tecnologia</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 9: Sintesi Operativa -->
+      <section id="sintesi" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Sintesi Operativa: Due Servizi Realistici</h2>
+
+          <!-- Servizio 1: Assistenza Redazione Atti -->
+          <div class="mb-16">
+            <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-blue-500">
+              <h3 class="font-semibold mb-6 text-blue-800">
+                <i class="fas fa-file-signature mr-2"></i>
+                Servizio 1: Assistenza alla Redazione degli Atti Amministrativi
+              </h3>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h4 class="font-semibold mb-4 text-gray-800">Descrizione Funzionamento</h4>
+                  <div class="space-y-3 text-sm">
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">1</span>
+                      <div>
+                        <h5 class="font-medium">Input Parametri</h5>
+                        <p class="text-gray-600">Funzionario inserisce tipo atto, oggetto, riferimenti normativi</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">2</span>
+                      <div>
+                        <h5 class="font-medium">Generazione Bozza</h5>
+                        <p class="text-gray-600">AI produce bozza strutturata (premesse, motivazione, dispositivo)</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">3</span>
+                      <div>
+                        <h5 class="font-medium">Verifica Umana</h5>
+                        <p class="text-gray-600">Funzionario modifica, integra, approva il testo</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">4</span>
+                      <div>
+                        <h5 class="font-medium">Controllo Formale</h5>
+                        <p class="text-gray-600">AI + umano verificano completezza e coerenza</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-medium">5</span>
+                      <div>
+                        <h5 class="font-medium">Finalizzazione</h5>
+                        <p class="text-gray-600">Protocollo e pubblicazione secondo procedure ordinarie</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold mb-4 text-gray-800">Perché è Adatto ai Piccoli Comuni</h4>
+                  <div class="space-y-3">
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+                      <h5 class="font-medium text-green-800">Riduzione Tempo 30-50%</h5>
+                      <p class="text-sm text-green-700">Per atti standard, liberando risorse per attività ad alto valore</p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+                      <h5 class="font-medium text-blue-800">Nessuna Competenza Tecnica Richiesta</h5>
+                      <p class="text-sm text-blue-700">Interfaccia intuitiva, training iniziale di 4-8 ore</p>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+                      <h5 class="font-medium text-purple-800">Responsabilità Umana Inalterata</h5>
+                      <p class="text-sm text-purple-700">AI propone, umano decide, mantiene controllo completo</p>
+                    </div>
+                    <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+                      <h5 class="font-medium text-orange-800">Funziona con Volumi Bassi</h5>
+                      <p class="text-sm text-orange-700">Beneficio percepibile già con 20-30 atti mensili</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <h4 class="font-semibold mb-3 text-gray-800">Limiti e Realtà Operativa</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="text-center">
+                    <i class="fas fa-clock text-2xl text-gray-600 mb-2"></i>
+                    <h5 class="font-medium">Tempi Implementazione</h5>
+                    <p class="text-sm text-gray-700">3-6 mesi</p>
+                  </div>
+                  <div class="text-center">
+                    <i class="fas fa-database text-2xl text-gray-600 mb-2"></i>
+                    <h5 class="font-medium">Training Iniziale</h5>
+                    <p class="text-sm text-gray-700">100-200 atti storici</p>
+                  </div>
+                  <div class="text-center">
+                    <i class="fas fa-exclamation-triangle text-2xl text-gray-600 mb-2"></i>
+                    <h5 class="font-medium">Rischio Allucinazioni</h5>
+                    <p class="text-sm text-gray-700">Necessaria verifica normativa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Servizio 2: Sportello Informativo -->
+          <div class="mb-16">
+            <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-green-500">
+              <h3 class="font-semibold mb-6 text-green-800">
+                <i class="fas fa-headset mr-2"></i>
+                Servizio 2: Sportello Informativo Digitale Assistito
+              </h3>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h4 class="font-semibold mb-4 text-gray-800">Descrizione Funzionamento</h4>
+                  <div class="space-y-3 text-sm">
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">1</span>
+                      <div>
+                        <h5 class="font-medium">Input Cittadino</h5>
+                        <p class="text-gray-600">Domanda in linguaggio naturale (web, app, telefono)</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">2</span>
+                      <div>
+                        <h5 class="font-medium">Analisi AI</h5>
+                        <p class="text-gray-600">Matching con knowledge base, indice confidenza</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">3a</span>
+                      <div>
+                        <h5 class="font-medium">Risposta Automatica</h5>
+                        <p class="text-gray-600">Se confidenza alta, risposta immediata al cittadino</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">3b</span>
+                      <div>
+                        <h5 class="font-medium">Escalation Umana</h5>
+                        <p class="text-gray-600">Se confidenza bassa, passaggio a operatore</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-medium">4</span>
+                      <div>
+                        <h5 class="font-medium">Feedback e Apprendimento</h5>
+                        <p class="text-gray-600">Operatore aggiorna knowledge base periodicamente</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold mb-4 text-gray-800">Perché è Adatto ai Piccoli Comuni</h4>
+                  <div class="space-y-3">
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+                      <h5 class="font-medium text-green-800">Disponibilità 24/7</h5>
+                      <p class="text-sm text-green-700">Senza costi di personale notturno, copre fasce non servite</p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+                      <h5 class="font-medium text-blue-800">Riduzione Carico Telefonico</h5>
+                      <p class="text-sm text-blue-700">20-30% in meno di chiamate ripetitive</p>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+                      <h5 class="font-medium text-purple-800">Miglior Percezione Servizio</h5>
+                      <p class="text-sm text-purple-700">Risposta immediata, anche se non definitiva</p>
+                    </div>
+                    <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+                      <h5 class="font-medium text-orange-800">Scalabilità Graduale</h5>
+                      <p class="text-sm text-orange-700">Knowledge base cresce con l&#39;uso, copre più domande</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <h4 class="font-semibold mb-3 text-gray-800">Limiti e Realtà Operativa</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="text-center">
+                    <i class="fas fa-clock text-2xl text-gray-600 mb-2"></i>
+                    <h5 class="font-medium">Tempi Implementazione</h5>
+                    <p class="text-sm text-gray-700">2-4 mesi</p>
+                  </div>
+                  <div class="text-center">
+                    <i class="fas fa-user-edit text-2xl text-gray-600 mb-2"></i>
+                    <h5 class="font-medium">Manutenzione</h5>
+                    <p class="text-sm text-gray-700">2-4 ore/settimana</p>
+                  </div>
+                  <div class="text-center">
+                    <i class="fas fa-exclamation-triangle text-2xl text-gray-600 mb-2"></i>
+                    <h5 class="font-medium">Gestione Situazioni Emotive</h5>
+                    <p class="text-sm text-gray-700">Escalation immediata</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <h3 class="font-semibold mb-4 text-gray-800">
+              <i class="fas fa-exclamation-triangle mr-3 text-orange-600"></i>
+              Cosa NON Aspettarsi da Questi Servizi
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-red-50 p-4 rounded">
+                <h4 class="font-semibold mb-3 text-red-800">In Termini di Efficienza</h4>
+                <ul class="space-y-1 text-sm text-red-700">
+                  <li>• Riduzioni drastiche del personale</li>
+                  <li>• Eliminazione completa degli errori</li>
+                  <li>• Soluzione immediata problemi strutturali</li>
+                </ul>
+              </div>
+              <div class="bg-orange-50 p-4 rounded">
+                <h4 class="font-semibold mb-3 text-orange-800">In Termini di Impatto</h4>
+                <ul class="space-y-1 text-sm text-orange-700">
+                  <li>• Attrazione automatica di nuovi residenti</li>
+                  <li>• Trasformazione digitale completa</li>
+                  <li>• Competitività turistica immediata</li>
+                </ul>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded">
+                <h4 class="font-semibold mb-3 text-yellow-800">In Termini di Tempi</h4>
+                <ul class="space-y-1 text-sm text-yellow-700">
+                  <li>• Implementazione rapida senza formazione</li>
+                  <li>• Benefici immediati dall&#39;installazione</li>
+                  <li>• Sostenibilità senza manutenzione</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 10: Costi-Benefici -->
+      <section id="costi-benefici" class="py-16 bg-white">
+        <div class="container mx-auto px-8 max-w-6xl">
+          <h2 class="tiempos text-4xl font-bold mb-12 text-center">Valutazione Costi-Benefici Qualitativa</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="bg-red-50 p-8 rounded-lg border border-red-200">
+              <h3 class="font-semibold mb-6 text-red-800">
+                <i class="fas fa-money-bill-wave mr-2"></i>
+                Costi Diretti
+              </h3>
+
+              <div class="mb-6">
+                <h4 class="font-medium mb-4 text-gray-800">Implementazione</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Analisi e personalizzazione:</span>
+                    <span class="font-bold text-red-600">€15.000-30.000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Integrazione sistemi:</span>
+                    <span class="font-bold text-red-600">€10.000-20.000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Formazione iniziale:</span>
+                    <span class="font-bold text-red-600">€5.000-10.000</span>
+                  </div>
+                  <div class="border-t border-red-200 pt-2 mt-2">
+                    <div class="flex justify-between font-bold">
+                      <span>Totale implementazione:</span>
+                      <span class="text-red-700">€30.000-60.000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-4 text-gray-800">Esercizio Annuale</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Licenze e manutenzione:</span>
+                    <span class="font-bold text-red-600">€8.000-15.000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Aggiornamento knowledge base:</span>
+                    <span class="font-bold text-red-600">€3.000-5.000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Supporto tecnico:</span>
+                    <span class="font-bold text-red-600">€5.000-10.000</span>
+                  </div>
+                  <div class="border-t border-red-200 pt-2 mt-2">
+                    <div class="flex justify-between font-bold">
+                      <span>Totale esercizio:</span>
+                      <span class="text-red-700">€16.000-30.000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-green-50 p-8 rounded-lg border border-green-200">
+              <h3 class="font-semibold mb-6 text-green-800">
+                <i class="fas fa-chart-line mr-2"></i>
+                Benefici Attesi
+              </h3>
+
+              <div class="mb-6">
+                <h4 class="font-medium mb-4 text-gray-800">Quantificabili</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Riduzione tempo redazione atti:</span>
+                    <span class="font-bold text-green-600">30-50%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Riduzione chiamate telefoniche:</span>
+                    <span class="font-bold text-green-600">20-30%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Minore ritardo risposte:</span>
+                    <span class="font-bold text-green-600">20-40%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-4 text-gray-800">Qualitativi</h4>
+                <div class="space-y-3">
+                  <div class="bg-green-100 p-3 rounded">
+                    <h5 class="font-medium text-green-800 text-sm">Migliore Qualità Atti</h5>
+                    <p class="text-xs text-green-700">Meno errori formali, maggiore completezza</p>
+                  </div>
+                  <div class="bg-blue-100 p-3 rounded">
+                    <h5 class="font-medium text-blue-800 text-sm">Soddisfazione Personale</h5>
+                    <p class="text-xs text-blue-700">Meno routine, più attività qualificanti</p>
+                  </div>
+                  <div class="bg-purple-100 p-3 rounded">
+                    <h5 class="font-medium text-purple-800 text-sm">Immagine Modernità</h5>
+                    <p class="text-xs text-purple-700">Percezione esterna di efficienza e innovazione</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="bg-yellow-50 p-8 rounded-lg border border-yellow-200">
+              <h3 class="font-semibold mb-6 text-yellow-800">
+                <i class="fas fa-clock mr-2"></i>
+                Costi Indiretti
+              </h3>
+
+              <div class="mb-6">
+                <h4 class="font-medium mb-4 text-gray-800">Tempo del Personale</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Partecipazione analisi:</span>
+                    <span class="font-bold text-yellow-600">20-40 ore (€1.000-2.000)</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Apprendimento procedure:</span>
+                    <span class="font-bold text-yellow-600">10-20 ore/anno (€500-1.000)</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Gestione eccezioni:</span>
+                    <span class="font-bold text-yellow-600">2-4 ore/sett. (€2.500-5.000/anno)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-4 text-gray-800">Rischio Politico</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Percezione &#34;spreco&#34;:</span>
+                    <span class="font-bold text-yellow-600">Media-Alta</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Critiche sostituzione lavoro:</span>
+                    <span class="font-bold text-yellow-600">Media</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Dipendenza fornitore:</span>
+                    <span class="font-bold text-yellow-600">Alta</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 p-8 rounded-lg border border-blue-200">
+              <h3 class="font-semibold mb-6 text-blue-800">
+                <i class="fas fa-balance-scale mr-2"></i>
+                Soglia di Convenienza
+              </h3>
+
+              <div class="mb-6">
+                <h4 class="font-medium mb-4 text-gray-800">Comuni per cui Conviene</h4>
+                <div class="space-y-3">
+                  <div class="bg-green-100 p-3 rounded border-l-4 border-green-500">
+                    <h5 class="font-medium text-green-800 text-sm">Volume Atti ≥ 500 annui</h5>
+                    <p class="text-xs text-green-700">Beneficio supera costo fisso</p>
+                  </div>
+                  <div class="bg-blue-100 p-3 rounded border-l-4 border-blue-500">
+                    <h5 class="font-medium text-blue-800 text-sm">Personale Stabile</h5>
+                    <p class="text-xs text-blue-700">Almeno 1 operatore con 2+ anni alla pensione</p>
+                  </div>
+                  <div class="bg-purple-100 p-3 rounded border-l-4 border-purple-500">
+                    <h5 class="font-medium text-purple-800 text-sm">Condivisione Progetto</h5>
+                    <p class="text-xs text-purple-700">Sindaco e segretario allineati</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-4 text-gray-800">Comuni per cui NON Conviene</h4>
+                <div class="space-y-3">
+                  <div class="bg-red-100 p-3 rounded border-l-4 border-red-500">
+                    <h5 class="font-medium text-red-800 text-sm">Volume Atti &lt; 200 annui</h5>
+                        <p class="text-xs text-red-700">Alternativa: procedure standardizzate</p>
+                  </div>
+                  <div class="bg-orange-100 p-3 rounded border-l-4 border-orange-500">
+                    <h5 class="font-medium text-orange-800 text-sm">Personale in Uscita</h5>
+                    <p class="text-xs text-orange-700">&gt;50% in pensione in 2 anni</p>
+                  </div>
+                  <div class="bg-yellow-100 p-3 rounded border-l-4 border-yellow-500">
+                    <h5 class="font-medium text-yellow-800 text-sm">Resistenza Culturale</h5>
+                    <p class="text-xs text-yellow-700">Blocco esplicito o implicito</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <h3 class="font-semibold mb-4 text-gray-800">
+              <i class="fas fa-calculator mr-3 text-blue-600"></i>
+              Conclusione della Valutazione Economica
+            </h3>
+            <p class="text-lg mb-4">
+              L&#39;investimento in questi servizi AI è giustificato solo per comuni con volumi di attività sufficienti e condizioni organizzative favorevoli.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-green-50 p-4 rounded border-l-4 border-green-500">
+                <h4 class="font-semibold text-green-800 mb-2">ROI Atteso</h4>
+                <ul class="space-y-1 text-sm text-green-700">
+                  <li>• Recupero investimento: 18-24 mesi</li>
+                  <li>• Riduzione costi operativi: 15-25%</li>
+                  <li>• Miglioramento qualità servizi: misurabile</li>
+                </ul>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded border-l-4 border-yellow-500">
+                <h4 class="font-semibold text-yellow-800 mb-2">Fattori Critici</h4>
+                <ul class="space-y-1 text-sm text-yellow-700">
+                  <li>• Volume minimo attività: 500+ atti/anno</li>
+                  <li>• Commitment management: alto</li>
+                  <li>• Capacità cambiamento: sufficiente</li>
+                </ul>
+              </div>
+              <div class="bg-blue-50 p-4 rounded border-l-4 border-blue-500">
+                <h4 class="font-semibold text-blue-800 mb-2">Raccomandazione</h4>
+                <ul class="space-y-1 text-sm text-blue-700">
+                  <li>• Partire con progetto pilota</li>
+                  <li>• Misurare risultati concreti</li>
+                  <li>• Scalare gradualmente</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conclusione Finale -->
+      <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-8 max-w-4xl">
+          <div class="callout-box">
+            <h2 class="tiempos text-3xl font-bold mb-6 text-center text-gray-800">
+              <i class="fas fa-flag-checkered mr-3 text-orange-600"></i>
+              Conclusione Strategica
+            </h2>
+            <p class="text-lg mb-6 leading-relaxed">
+              L&#39;intelligenza artificiale può essere uno strumento utile per i piccoli comuni italiani, ma <strong>solo se introdotta con realismo, gradualità e rispetto dei vincoli strutturali</strong>.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+              <div>
+                <h3 class="font-semibold mb-4 text-green-700">Opportunità Concrete</h3>
+                <ul class="space-y-2 text-sm text-green-700">
+                  <li>• Assistenza alla redazione atti amministrativi</li>
+                  <li>• Sportello informativo digitale assistito</li>
+                  <li>• Supporto concreto, quotidiano, rispettoso</li>
+                  <li>• Benefici misurabili e rischi contenuti</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-4 text-red-700">Limiti da Considerare</h3>
+                <ul class="space-y-2 text-sm text-red-700">
+                  <li>• Non risolvono problemi di fondo (spopolamento)</li>
+                  <li>• Non sono soluzioni miracolose o complete</li>
+                  <li>• Richiedono investimento e cambiamento culturale</li>
+                  <li>• Necessitano governance condivisa e sostenibile</li>
+                </ul>
+              </div>
+            </div>
+            <blockquote class="italic text-lg border-l-4 border-orange-500 pl-6 mb-6 text-gray-700">
+              &#34;L&#39;obiettivo non è la trasformazione digitale dei piccoli comuni, che resta un&#39;ambizione lontana, ma il supporto concreto, quotidiano, rispettoso a chi lavora in queste amministrazioni con risorse insufficienti e impegno spesso eroico.&#34;
+            </blockquote>
+            <p class="text-center text-sm text-gray-600">
+              La forma organizzativa della cooperativa o del consorzio, la governance condivisa, il modello economico basato su risultati sono <strong>condizioni necessarie per costruire fiducia e sostenibilità</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Demographic Chart
+            const demographicCtx = document.getElementById('demographicChart').getContext('2d');
+            new Chart(demographicCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nord-Ovest', 'Nord-Est', 'Centro', 'Sud', 'Isole', 'Italia'],
+                    datasets: [{
+                        label: 'Saldo Demografico (‰)',
+                        data: [2.3, 2.0, -1.0, -3.7, -3.8, -0.4],
+                        backgroundColor: [
+                            'rgba(139, 188, 143, 0.8)',
+                            'rgba(139, 188, 143, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(220, 53, 69, 0.8)',
+                            'rgba(220, 53, 69, 0.8)',
+                            'rgba(108, 117, 125, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(139, 188, 143, 1)',
+                            'rgba(139, 188, 143, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(220, 53, 69, 1)',
+                            'rgba(220, 53, 69, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Saldo demografico (‰)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // PEC Chart
+            const pecCtx = document.getElementById('pecChart').getContext('2d');
+            new Chart(pecCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Tempo di gestione', 'Tasso di errore'],
+                    datasets: [{
+                        label: 'Prima',
+                        data: [100, 15],
+                        backgroundColor: 'rgba(220, 53, 69, 0.8)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Dopo',
+                        data: [60, 5],
+                        backgroundColor: 'rgba(139, 188, 143, 0.8)',
+                        borderColor: 'rgba(139, 188, 143, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Valore (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chatbot Chart
+            const chatbotCtx = document.getElementById('chatbotChart').getContext('2d');
+            new Chart(chatbotCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Riduzione chiamate', 'Domande standard', 'Domande complesse'],
+                    datasets: [{
+                        data: [30, 50, 20],
+                        backgroundColor: [
+                            'rgba(139, 188, 143, 0.8)',
+                            'rgba(108, 117, 125, 0.8)',
+                            'rgba(255, 193, 7, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(139, 188, 143, 1)',
+                            'rgba(108, 117, 125, 1)',
+                            'rgba(255, 193, 7, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Table of Contents Active Link
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc-link');
+
+            function updateActiveLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        });
+    </script>
+  
+
+</body></html>

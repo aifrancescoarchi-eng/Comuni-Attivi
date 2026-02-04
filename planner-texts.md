@@ -2,27 +2,29 @@
 
 ## Hero / Intestazione
 - **Titolo (H1):** Comuni Attivi
-- **Sottotitolo:** Supporto ai comuni di Vallesaccarda e dintorni
-- **Descrizione hero:** Ti aiuto a trovare e vincere bandi pubblici per piccoli comuni (PNRR, Regione Campania, GAL Irpinia). Monitoro i bandi, preparo la documentazione e ti faccio risparmiare tempo.
-- **CTA:** Contattami (servizio gratuito per 3 mesi)
+- **Sottotitolo:** Supporto concreto a piccoli comuni per bandi, demografia e digitalizzazione
+- **CTA:** Contattami
 - **Microcopy logo:** Comuni Attivi
 
 ## Chi sono
-Sono [Nome], 19 anni, residente a Vallesaccarda. Ho notato che molti comuni della nostra zona perdono opportunità di finanziamento perché mancano tempo e persone per monitorare i bandi. Offro supporto gratuito ai comuni limitrofi per monitorare bandi settimanalmente, preparare documentazione e aiutare nella candidatura.
+Sono un ragazzo di 19 anni che vive in un piccolo comune. Conosco le difficoltà quotidiane di sindaci e segretari comunali. Offro aiuto pratico e low‑cost su task ripetitivi, bandi anti‑spopolamento e organizzazione dei dati.
 
 ## Cosa offro (Servizi)
-- Monitoraggio bandi settimanale (Regione Campania, GAL Irpinia, PNRR piccoli comuni, ANCI, Ministeri)
-- Supporto documentazione: bozze progetto, cronoprogrammi, budget
-- Aiuto nella candidatura e nel caricamento sulle piattaforme online
+- Analisi demografica rapida con AI e dati pubblici
+- Supporto alla compilazione di bandi PNRR e regionali
+- Automazione di task ripetitivi (protocollo, anagrafe, email)
+- Agenti AI per segreterie comunali e uffici tecnici
+- Workshop e formazione gratuita/low‑cost per il personale
 
 ## Esempi / Risultati
-Sto partendo. Il primo comune con cui collaboro è Vallesaccarda. Appena avrò risultati concreti li condividerò qui.
+- **Comune di X:** compilata domanda per bonus famiglie in 48 ore
+- **Comune di Y:** analisi demografica con 3 interventi anti‑spopolamento
+- **Comune di Z:** automatizzato l’invio email a cittadini con risparmio di tempo
 
 ## Contatti
-- **Località:** Vallesaccarda (AV)
 - **Email:** info@comuniattivi.it
 - **WhatsApp/Telegram:** +39 000 000 0000
-- **Nota:** Prima chiacchierata sempre gratuita. Servizio gratuito per i primi 3 mesi.
+- **Social:** LinkedIn | Instagram
 
 ## Footer
 - Comuni Attivi – Codice Fiscale / P.IVA: da inserire
