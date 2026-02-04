@@ -1,63 +1,101 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { MessageCircle, Calendar, Euro } from "lucide-react";
+
+const upcomingGrants = [
+  {
+    name: "Efficientamento energetico",
+    deadline: "30 marzo 2026",
+    amount: "50-80k €",
+  },
+  {
+    name: "Digitalizzazione servizi",
+    deadline: "15 aprile 2026",
+    amount: "30-50k €",
+  },
+  {
+    name: "Rigenerazione urbana",
+    deadline: "30 aprile 2026",
+    amount: "80-120k €",
+  },
+];
 
 const Hero = () => {
-  return (
-    <section className="relative bg-hero-gradient text-primary-foreground overflow-hidden">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+  const whatsappLink = "https://wa.me/393XXXXXXXXX"; // Sostituire con numero reale
 
-      <div className="container relative py-20 md:py-28 lg:py-32">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Logo/Brand */}
-          <div className="animate-fade-in">
-            <span className="inline-block text-sm font-medium tracking-widest uppercase opacity-80 mb-4">
-              Per i piccoli comuni italiani
-            </span>
+  return (
+    <section className="py-12 md:py-20 lg:py-24 bg-background">
+      <div className="container">
+        {/* Badge */}
+        <div className="animate-fade-in mb-6">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full">
+            📍 Vallesaccarda e dintorni - Servizio locale
+          </span>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left Column - Text */}
+          <div className="animate-fade-in-up">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-6 text-balance">
+              Ti aiuto a trovare e vincere bandi pubblici
+            </h1>
+            
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl">
+              Monitoro i bandi per te, preparo la documentazione, ti faccio risparmiare tempo.{" "}
+              <span className="font-semibold text-foreground">Gratis per i primi 3 mesi.</span>
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold shadow-button"
+                onClick={() => window.open(whatsappLink, "_blank")}
+              >
+                <MessageCircle className="mr-2 h-5 w-5" />
+                Scrivimi su WhatsApp
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-border text-foreground hover:bg-secondary"
+                onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                Mandami una email
+              </Button>
+            </div>
           </div>
 
-          {/* Main Title */}
-          <h1 className="animate-fade-in-up text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            Comuni Attivi
-          </h1>
+          {/* Right Column - Upcoming Grants Box */}
+          <div className="animate-fade-in-up animate-delay-200">
+            <div className="bg-card rounded-xl border border-border p-6 shadow-card">
+              <h2 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                <Calendar className="h-5 w-5 text-primary" />
+                Prossimi bandi in scadenza
+              </h2>
+              
+              <div className="space-y-4">
+                {upcomingGrants.map((grant, index) => (
+                  <div 
+                    key={index}
+                    className="flex items-center justify-between py-3 border-b border-border last:border-0 last:pb-0"
+                  >
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{grant.name}</p>
+                      <p className="text-xs text-muted-foreground mt-1">Scadenza: {grant.deadline}</p>
+                    </div>
+                    <div className="flex items-center gap-1 text-sm font-semibold text-primary">
+                      <Euro className="h-4 w-4" />
+                      {grant.amount}
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-          {/* Subtitle */}
-          <p className="animate-fade-in-up animate-delay-100 text-lg md:text-xl opacity-90 mb-10 max-w-2xl mx-auto text-balance leading-relaxed">
-            Supportiamo i comuni sotto i 5.000 abitanti con bandi, analisi demografiche, 
-            strategie anti-spopolamento e automazione amministrativa basata su intelligenza artificiale.
-          </p>
-
-          {/* CTA */}
-          <div className="animate-fade-in-up animate-delay-200 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 py-6 text-base shadow-lg hover:shadow-xl transition-all"
-              onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Contattaci
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-primary-foreground/30 text-primary-foreground bg-transparent hover:bg-primary-foreground/10 px-8 py-6 text-base"
-              onClick={() => document.getElementById("servizi")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Scopri i servizi
-            </Button>
+              <p className="text-xs text-muted-foreground mt-4 pt-4 border-t border-border">
+                Lista aggiornata ogni lunedì mattina
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Bottom wave decoration */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-          <path d="M0 60L1440 60L1440 30C1440 30 1200 0 720 0C240 0 0 30 0 30L0 60Z" fill="hsl(210 20% 98%)" />
-        </svg>
       </div>
     </section>
   );

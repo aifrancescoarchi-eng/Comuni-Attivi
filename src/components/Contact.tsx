@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Send, CheckCircle } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const whatsappLink = "https://wa.me/393XXXXXXXXX"; // Sostituire con numero reale
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,22 +24,21 @@ const Contact = () => {
     setIsSubmitted(true);
     
     toast({
-      title: "Messaggio inviato",
-      description: "Ti risponderemo al più presto. Grazie per averci contattato!",
+      title: "Messaggio inviato!",
+      description: "Ti rispondo entro 24 ore. Grazie!",
     });
   };
 
   return (
-    <section id="contatti" className="py-16 md:py-20 lg:py-24 bg-background">
+    <section id="contatti" className="py-16 md:py-20 bg-background">
       <div className="container">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               Parliamo del tuo comune
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Contattaci per una consulenza gratuita. Analizzeremo insieme le opportunità 
-              più adatte alle esigenze del tuo territorio.
+            <p className="text-muted-foreground">
+              Scrivimi per una chiacchierata senza impegno.
             </p>
           </div>
 
@@ -45,26 +46,43 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="md:col-span-2 space-y-6">
               <div>
-                <h3 className="font-semibold text-foreground mb-4">Contatto diretto</h3>
-                <a
-                  href="mailto:info@comuniattivi.it"
-                  className="inline-flex items-center gap-3 text-primary hover:text-primary/80 transition-colors font-medium"
-                >
-                  <Mail className="h-5 w-5" />
-                  info@comuniattivi.it
-                </a>
+                <h3 className="font-semibold text-foreground mb-4">Contatti diretti</h3>
+                
+                <div className="space-y-4">
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-medium"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                      <MessageCircle className="h-5 w-5 text-accent" />
+                    </div>
+                    WhatsApp
+                  </a>
+                  
+                  <a
+                    href="mailto:tuaemail@example.com"
+                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-medium"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Mail className="h-5 w-5 text-primary" />
+                    </div>
+                    tuaemail@example.com
+                  </a>
+                  
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+                      <MapPin className="h-5 w-5 text-muted-foreground" />
+                    </div>
+                    Vallesaccarda (AV)
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">Rispondiamo entro</h3>
-                <p className="text-muted-foreground">24-48 ore lavorative</p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">Per chi è</h3>
-                <p className="text-muted-foreground text-sm">
-                  Il nostro servizio è dedicato a sindaci, assessori e segretari comunali 
-                  di comuni italiani sotto i 5.000 abitanti.
+              <div className="pt-4 border-t border-border">
+                <p className="text-sm text-muted-foreground">
+                  ⏱️ Rispondo entro <span className="font-medium text-foreground">24 ore</span>
                 </p>
               </div>
             </div>
@@ -72,41 +90,28 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="md:col-span-3">
               {isSubmitted ? (
-                <div className="bg-muted rounded-lg p-8 text-center">
+                <div className="bg-primary/5 rounded-xl p-8 text-center border border-primary/20">
                   <CheckCircle className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-foreground mb-2">
-                    Grazie per il tuo messaggio!
+                    Messaggio ricevuto!
                   </h3>
                   <p className="text-muted-foreground">
-                    Ti contatteremo presto per discutere delle esigenze del tuo comune.
+                    Ti rispondo entro 24 ore. Grazie per la fiducia!
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Nome e cognome *</Label>
+                      <Label htmlFor="name">Nome *</Label>
                       <Input
                         id="name"
                         name="name"
                         required
-                        placeholder="Mario Rossi"
+                        placeholder="Il tuo nome"
                         className="bg-card"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="role">Ruolo *</Label>
-                      <Input
-                        id="role"
-                        name="role"
-                        required
-                        placeholder="Sindaco, Segretario..."
-                        className="bg-card"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
                       <Label htmlFor="email">Email *</Label>
                       <Input
@@ -114,47 +119,39 @@ const Contact = () => {
                         name="email"
                         type="email"
                         required
-                        placeholder="mario.rossi@comune.it"
-                        className="bg-card"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="comune">Nome del Comune *</Label>
-                      <Input
-                        id="comune"
-                        name="comune"
-                        required
-                        placeholder="Comune di..."
+                        placeholder="tua@email.it"
                         className="bg-card"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Messaggio *</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
+                    <Label htmlFor="comune">Comune *</Label>
+                    <Input
+                      id="comune"
+                      name="comune"
                       required
-                      rows={4}
-                      placeholder="Descrivi brevemente le esigenze del tuo comune..."
-                      className="bg-card resize-none"
+                      placeholder="Nome del tuo comune"
+                      className="bg-card"
                     />
                   </div>
 
-                  <p className="text-xs text-muted-foreground">
-                    Inviando questo modulo accetti la nostra{" "}
-                    <a href="#privacy" className="underline hover:text-foreground">
-                      Privacy Policy
-                    </a>
-                    . I tuoi dati saranno trattati nel rispetto del GDPR.
-                  </p>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Messaggio</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      placeholder="Come posso aiutarti?"
+                      className="bg-card resize-none"
+                    />
+                  </div>
 
                   <Button
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 font-semibold"
+                    className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground font-semibold shadow-button"
                   >
                     {isSubmitting ? (
                       "Invio in corso..."
